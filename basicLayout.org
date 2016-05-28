@@ -1,0 +1,129 @@
+Basic Layout for Encryptorix
+============================
+
+* DONE Message
+  CLOSED: [2014-03-23 Sun 18:22]
+- has ClearText
+- has UnClearText
+
+* TODO ClearText and UnClearText
+- are SignArrays
+
+* TODO SignArray
+- has Integer[][]
+
+* TODO Word
+- are Strings
+
+* TODO Structure
+- has ReadingPrescription
+- can be transformed
+
+* TODO ReadingPrescription
+- has NextChar
+- implements reading order to convert array to list
+
+* TODO RowAfterRow
+- is ReadingPrescription
+- has NextChar = x++ > x_max?y++;0:x
+
+* TODO ColumnAfterColumn
+- is ReadingPrescription
+- has NextChar = y++ > y_max?x++;0:y
+
+* TODO RowAfterRowReversed
+- is ReadingPrescription
+- has NextChar = x-- < 0?y--;x_max:x
+
+* TODO ColumnAfterColumnReversed
+- is ReadingPrescription
+- has NextChar = y-- < 0?x--;y_max:y
+
+* DONE EncryptionScheme
+  CLOSED: [2014-03-23 Sun 18:21]
+- has Key
+- has Procedure in method encrypt
+
+* DONE EncryptionChain
+  CLOSED: [2014-03-23 Sun 18:21]
+- is chain of EncryptionSchemes
+
+* DONE ToUpper
+  CLOSED: [2014-03-23 Sun 18:21]
+- is EncryptionScheme
+- has Key: false
+- has Procedure: take ClearText, make all :alpha: uppercase
+
+* DONE ToLower
+  CLOSED: [2014-03-23 Sun 18:21]
+- is EncryptionScheme
+- has Key: false
+- has Procedure: take Cleartext, make all :alpha: lowercase
+
+* TODO Base64
+- is EncryptionScheme
+- has Key: false
+- has Procedure: take Cleartext, replace by base64 values
+
+* TODO StripSyntax
+- is EncryptionScheme
+- has Key: false
+- has Procedure: remove all !:alnum: chars from ClearText
+
+* TODO ReverseCharsInWords
+- is EncryptionScheme
+- has Key: false
+- has Procedure: take word from ClearText, reverse char order
+
+* TODO RotateCharsInWords
+- is EncryptionScheme
+- has Key: shift
+- has Procedure: take word from ClearText, move chars by shift, mod length(word)
+
+* TODO SplitText
+- is EncryptionScheme
+- has Key: size of slabs
+- has Procedure: take ClearText, split anew in slabs of given size
+
+* DONE Cesar
+  CLOSED: [2014-03-23 Sun 18:19]
+- is EncryptionScheme
+- has Key: shift
+- has Procedure: take char from ClearText, move it by shift, mod 26
+
+* TODO Vignere
+- is EncryptionScheme
+- has Key: password
+- has Procedure: take ClearText, write password repeatedly above encrypt by Cesar
+
+* DONE AddBlind
+  CLOSED: [2014-03-23 Sun 18:19]
+- is EncryptionScheme
+- has Key: distance between inserts
+- has Procedure: take ClearText, insert every distance a new, random char
+
+* DONE AddBlindRandom
+  CLOSED: [2014-03-23 Sun 18:19]
+- is EncryptionScheme
+- has Key: percentage of inserted chars
+- has Procedure: take ClearText, insert # random chars
+
+* TODO Skythala
+- is EncryptionScheme
+- has Key: Modulus
+- has Procedure: take Cleartext, resort by setting the next char at pos += Modulus, mod size
+
+* DONE RandomPermutationAlpha
+  CLOSED: [2014-03-23 Sun 18:18]
+- is EncryptionScheme
+- has Key: permutation of :alpha:
+- has Procedure: replacement of each char in ClearText by permutation
+
+* DONE RandomPermutationAlphaNum
+  CLOSED: [2014-03-23 Sun 18:18]
+- is EncryptionScheme
+- has Key: permutation of :alnum:
+- has Procedure: replacement of each char in ClearText by permutation
+
+
+

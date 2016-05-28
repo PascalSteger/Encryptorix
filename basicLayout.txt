@@ -1,0 +1,134 @@
+Basic Layout for Encryptorix
+============================
+
+//Message
+//has ClearText
+//has UnClearText
+
+//ClearText and UnClearText
+//are SignArrays
+
+SignArray
+has Integer[][]
+
+Word
+are Strings
+
+Structure
+has ReadingPrescription
+can be transformed
+
+ReadingPrescription
+has NextChar
+implements reading order to convert array to list
+
+RowAfterRow
+is ReadingPrescription
+has NextChar = x++ > x_max?y++;0:x
+
+ColumnAfterColumn
+is ReadingPrescription
+has NextChar = y++ > y_max?x++;0:y
+
+RowAfterRowReversed
+is ReadingPrescription
+has NextChar = x-- < 0?y--;x_max:x
+
+ColumnAfterColumnReversed
+is ReadingPrescription
+has NextChar = y-- < 0?x--;y_max:y
+
+//EncryptionScheme
+//has Key
+//has Procedure in method encrypt
+
+//EncryptionChain
+//is chain of EncryptionSchemes
+
+//ToUpper
+//is EncryptionScheme
+//has Key: false
+//has Procedure: take ClearText,
+//    	       make all :alpha: uppercase
+
+//ToLower
+//is EncryptionScheme
+//has Key: false
+//has Procedure: take Cleartext,
+//    	       make all :alpha: lowercase
+
+Base64
+is EncryptionScheme
+has Key: false
+has Procedure: take Cleartext,
+    	       replace by base64 values
+
+//StripSyntax
+//is EncryptionScheme
+//has Key: false
+//has Procedure: remove all !:alnum: chars from ClearText
+
+ReverseCharsInWords
+is EncryptionScheme
+has Key: false
+has Procedure: take word from ClearText,
+    	       reverse char order
+
+RotateCharsInWords
+is EncryptionScheme
+has Key: shift
+has Procedure: take word from ClearText,
+    	       move chars by shift, mod length(word)
+
+//SplitText
+//is EncryptionScheme
+//has Key: size of slabs
+//has Procedure: take ClearText,
+//    	       split anew in slabs of given size
+
+//Cesar
+//is EncryptionScheme
+//has Key: shift
+//has Procedure: take char from ClearText
+//    	       move it by shift, mod 26
+
+Vignere
+is EncryptionScheme
+has Key: password
+has Procedure: take ClearText,
+    	       write password repeatedly above
+	       encrypt by Cesar
+
+
+
+//AddBlind
+//is EncryptionScheme
+//has Key: distance between inserts
+//has Procedure: take ClearText,
+//    	       insert every distance a new, random char
+
+//AddBlindRandom
+//is EncryptionScheme
+//has Key: percentage of inserted chars
+//has Procedure: take ClearText,
+//    	       insert # random chars
+
+
+Skythala
+is EncryptionScheme
+has Key: Modulus
+has Procedure: take Cleartext,
+    	       resort by setting the next char at pos += Modulus, mod size
+
+//RandomPermutationAlpha
+//is EncryptionScheme
+//has Key: permutation of :alpha:
+//has Procedure: replacement of each char in ClearText by permutation
+
+//RandomPermutationAlphaNum
+//is EncryptionScheme
+//has Key: permutation of :alnum:
+//has Procedure: replacement of each char in ClearText by permutation
+
+
+

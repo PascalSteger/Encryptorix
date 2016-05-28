@@ -1,0 +1,12 @@
+TODO Encryptor
+++++++++++++++
+
+o implement all basic encryptions with Strings
+o implement guess structure
+o implement Cesar decryption
+o implement monoalphabetic decryption with statistical cracking
+o try it on letter text
+o implement Vignere keylength finder
+o implement Vignere decryption
+o try it on letter text
+o implement text as stream
